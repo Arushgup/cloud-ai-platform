@@ -1,0 +1,22 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: application-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ForResume
+    username: arushgupta
+    password: 12345678
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: application-group
+      auto-offset-reset: earliest
