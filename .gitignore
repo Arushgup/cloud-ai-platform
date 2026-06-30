@@ -1,1 +1,4 @@
 *.zip
+
+# Ignore Git metadata backups created during repo conversion
+**/.git.backup
