@@ -1,4 +1,7 @@
 services:
+  # ==========================
+  # AUTH SERVICE
+  # ==========================
   - type: web
     name: auth-service
     runtime: java
@@ -9,12 +12,57 @@ services:
     envVars:
       - key: SPRING_DATASOURCE_URL
         sync: false
-
       - key: SPRING_DATASOURCE_USERNAME
         sync: false
-
       - key: SPRING_DATASOURCE_PASSWORD
         sync: false
-
       - key: JWT_SECRET
+        sync: false
+
+  # ==========================
+  # APPLICATION SERVICE
+  # ==========================
+  - type: web
+    name: application-service
+    runtime: java
+    rootDir: application-service
+    buildCommand: ./mvnw clean package
+    startCommand: java -jar target/*.jar
+
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        sync: false
+      - key: SPRING_DATASOURCE_USERNAME
+        sync: false
+      - key: SPRING_DATASOURCE_PASSWORD
+        sync: false
+      - key: KAFKA_BOOTSTRAP_SERVERS
+        sync: false
+
+  # ==========================
+  # API GATEWAY
+  # ==========================
+  - type: web
+    name: api-gateway
+    runtime: java
+    rootDir: api-gateway
+    buildCommand: ./mvnw clean package
+    startCommand: java -jar target/*.jar
+
+    envVars:
+      - key: JWT_SECRET
+        sync: false
+
+  # ==========================
+  # AI SERVICE
+  # ==========================
+  - type: web
+    name: ai-service
+    runtime: python
+    rootDir: ai-service
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+
+    envVars:
+      - key: GROQ_API_KEY
         sync: false
