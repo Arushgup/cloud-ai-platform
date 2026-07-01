@@ -16,6 +16,7 @@ export default function FeatureCard({
   description,
   path,
   icon,
+  emoji,
 }: Props) {
   const navigate = useNavigate();
 
@@ -33,9 +34,12 @@ export default function FeatureCard({
         {icon}
       </div>
 
-      <h2 className="mt-5 text-xl font-bold">
-        {title}
-      </h2>
+      <div className="mt-5 flex items-center gap-3">
+        <span className="text-3xl">{emoji}</span>
+        <h2 className="text-xl font-bold">
+          {title}
+        </h2>
+      </div>
 
       <p className="mt-3 text-gray-500">
         {description}
