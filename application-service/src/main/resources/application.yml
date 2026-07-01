@@ -6,17 +6,20 @@ spring:
     name: application-service
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/jobcopilot
-    username: admin
-    password: 12345678
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/jobcopilot}
+    username: ${SPRING_DATASOURCE_USERNAME:admin}
+    password: ${SPRING_DATASOURCE_PASSWORD:12345678}
+    driver-class-name: org.postgresql.Driver
 
   jpa:
     hibernate:
       ddl-auto: update
+
     show-sql: true
 
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+
     consumer:
       group-id: application-group
       auto-offset-reset: earliest

@@ -3,20 +3,22 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/jobcopilot
-    username: admin
-    password: 12345678
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/jobcopilot}
+    username: ${SPRING_DATASOURCE_USERNAME:admin}
+    password: ${SPRING_DATASOURCE_PASSWORD:12345678}
     driver-class-name: org.postgresql.Driver
 
   jpa:
     hibernate:
       ddl-auto: update
+
     show-sql: true
+
     properties:
       hibernate:
         format_sql: true
 
 jwt:
-  secret: mySuperSecretKeyForJwtGeneration12345
+  secret: ${JWT_SECRET:mySuperSecretKeyForJwtGeneration12345}
   expiration: 3600000
   refresh-expiration: 86400000
