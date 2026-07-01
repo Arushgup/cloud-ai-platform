@@ -1,12 +1,13 @@
-services:
+version: "3.9"
 
+services:
   postgres:
     image: postgres:15
     container_name: jobcopilot-postgres
     environment:
       POSTGRES_DB: jobcopilot
       POSTGRES_USER: admin
-      POSTGRES_PASSWORD: 12345678
+      POSTGRES_PASSWORD: "12345678"
     ports:
       - "5432:5432"
     networks:
@@ -34,31 +35,32 @@ services:
     depends_on:
       - zookeeper
     ports:
-    - "9092:9092"
+      - "9092:9092"
     environment:
       KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092"
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT"
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      networks:
-        - job-network
+    networks:
+      - job-network
 
   ai-service:
-  build: ../ai-service
-  container_name: jobcopilot-ai
-  ports:
-    - "8000:8000"
-  environment:
-    - KAFKA_BOOTSTRAP_SERVERS=kafka:29092
-    - KAFKA_RESUME_TOPIC=resume-uploaded
-    - KAFKA_DLQ_TOPIC=resume-dlq
-    - KAFKA_GROUP_ID=ai-service
-  depends_on:
-    - kafka
-  networks:
-    - job-network
+    build:
+      context: ../ai-service
+    container_name: jobcopilot-ai
+    ports:
+      - "8000:8000"
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: "kafka:29092"
+      KAFKA_RESUME_TOPIC: "resume-uploaded"
+      KAFKA_DLQ_TOPIC: "resume-dlq"
+      KAFKA_GROUP_ID: "ai-service"
+    depends_on:
+      - kafka
+    networks:
+      - job-network
 
 networks:
   job-network:

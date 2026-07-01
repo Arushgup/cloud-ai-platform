@@ -6,8 +6,8 @@ spring:
     name: application-service
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/ForResume
-    username: arushgupta
+    url: jdbc:postgresql://localhost:5432/jobcopilot
+    username: admin
     password: 12345678
 
   jpa:
