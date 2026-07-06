@@ -6,7 +6,7 @@ export const runPipeline = async (
   token: string
 ) => {
   const response = await api.post(
-    "/api/v1/pipeline/run",
+    "/v1/pipeline/run",
     {
       resume_id: "frontend-resume",
       job_id: "frontend-job",
