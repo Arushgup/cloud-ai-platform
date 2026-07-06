@@ -10,18 +10,18 @@ spring:
       routes:
 
         - id: auth-service
-          uri: http://localhost:8081
+          uri: http://auth-service:8081
           predicates:
             - Path=/api/auth/**
 
         - id: application-service
-          uri: http://localhost:8082
+          uri: http://application-service:8082
           predicates:
             - Path=/api/resume/**
             - Path=/api/resume
 
         - id: ai-service
-          uri: http://localhost:8000
+          uri: http://ai-service:8000
           predicates:
             - Path=/api/v1/**
 
