@@ -93,10 +93,25 @@ services:
       - "8080:8080"
     environment:
       JWT_SECRET: ${JWT_SECRET}
+    env_file:
+      - .env
     depends_on:
       - auth-service
       - application-service
       - ai-service
+    networks:
+      - job-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - api-gateway
     networks:
       - job-network
 
