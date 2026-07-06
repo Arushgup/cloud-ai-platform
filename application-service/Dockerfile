@@ -1,4 +1,5 @@
-FROM eclipse-temurin:21-jdk
+# ---------- Build Stage ----------
+FROM eclipse-temurin:21-jdk AS builder
 
 WORKDIR /app
 
@@ -8,6 +9,13 @@ RUN chmod +x mvnw
 
 RUN ./mvnw clean package -DskipTests
 
+# ---------- Runtime Stage ----------
+FROM eclipse-temurin:21-jre
+
+WORKDIR /app
+
+COPY --from=builder /app/target/application-service-0.0.1-SNAPSHOT.jar app.jar
+
 EXPOSE 8082
 
-CMD ["java","-jar","target/application-service-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]

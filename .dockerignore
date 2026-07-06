@@ -1,0 +1,11 @@
+.git
+
+**/.idea
+
+**/target
+
+**/.venv
+
+**/node_modules
+
+frontend/dist
