@@ -6,7 +6,7 @@ export const generateColdEmail = async (
   token: string
 ) => {
   const response = await api.post(
-    "/api/v1/email/generate",
+    "/v1/email/generate",
     {
       resume_id: "frontend-resume",
       job_id: "frontend-job",

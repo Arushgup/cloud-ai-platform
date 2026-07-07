@@ -7,7 +7,7 @@ export const getATSScore = async (
 ) => {
 
   const response = await api.post(
-    "/api/v1/ats/score",
+    "/v1/ats/score",
     {
       job_id: "frontend-job",
       resume_text: resumeText,

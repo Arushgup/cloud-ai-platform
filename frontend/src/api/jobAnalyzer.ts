@@ -5,7 +5,7 @@ export const analyzeJob = async (
   token: string
 ) => {
   const response = await api.post(
-    "/api/v1/jobs/analyze",
+    "/v1/jobs/analyze",
     {
       job_id: "frontend-job",
       jd_text: jdText,

@@ -1,7 +1,7 @@
 import api from "./axios";
 
 export async function getDashboard(token: string) {
-  const response = await api.get("/api/dashboard", {
+  const response = await api.get("/dashboard", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
